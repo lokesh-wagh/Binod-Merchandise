@@ -1,0 +1,197 @@
+.product {
+	position: relative;
+	width: 100%;
+	height: fit-content;
+	min-height: 100vh;
+}
+
+.product-title {
+	position: relative;
+	display: block;
+	width: 100%;
+	margin-top: 50px;
+	font: normal 1.2em Montserrat;
+	color: black;
+}
+
+.product-filter {
+	position: relative;
+	display: block;
+	width: 100%;
+	margin-top: 25px;
+}
+
+.product-filter button {
+	display: inline-block;
+	font: normal 1em Montserrat;
+	color: grey;
+	border: none;
+	background-color: transparent;
+}
+
+.active {
+	color: black !important;
+	text-decoration: underline;
+}
+
+.products {
+	display: grid;
+	margin-top: 50px;
+	grid-template-columns: minmax(250px, auto) minmax(250px, auto) minmax(
+			250px,
+			auto
+		) minmax(250px, auto);
+}
+
+.card {
+	display: block;
+	width: 80%;
+	height: 300px;
+	margin: 20px;
+	border-radius: 15px;
+    background: #E7E7E7;
+    background-size: cover;
+    box-shadow:  20px 20px 60px #c9c9c9,
+                 -20px -20px 60px #ffffff;
+    text-align: left;
+    padding: 5px;
+}
+
+.card-title {
+    backdrop-filter: blur(8px);
+    border-radius: 15px;
+    border: 1px solid #a4a4a4;
+	position: absolute;
+	bottom: 5px;
+    color: rgb(0, 0, 0);
+    width: fit-content;
+	height: fit-content;
+    padding: 5px;
+    font: normal 1em Montserrat;
+    font-variant: small-caps;
+}
+
+.card-size {
+    backdrop-filter: blur(8px);
+    border-radius: 50%;
+    border: 1.5px solid #a4a4a4;
+	position: absolute;
+	top: 5px;
+    color: rgb(0, 0, 0);
+    width: 30px;
+	height: 30px;
+    padding: 5px;
+    font: normal 1em Montserrat;
+    font-variant: small-caps;
+	text-align: center;
+}
+
+.card-size-selector {
+    backdrop-filter: blur(8px);
+    border-radius: 10%;
+    border: 1.5px solid #a4a4a4;
+	position: absolute;
+	top: 5px;
+    color: rgb(0, 0, 0);
+    padding: 5px;
+    font: normal 1em Montserrat;
+    font-variant: small-caps;
+	text-align: center;
+}
+
+.card input[type="text"]{
+	width: 60%;
+}
+
+.card-add-button {
+    backdrop-filter: blur(8px);
+    border-radius: 50%;
+    border: 1.5px solid #a4a4a4;
+	position: absolute;
+	bottom: 5px;
+	right: 5px;
+    color: rgb(0, 0, 0);
+    width: 50px;
+	height: 50px;
+    background-size: 50%;
+    background-image: url("data:image/svg+xml;base64,PHN2ZyBoZWlnaHQ9IjQ0OHB0IiB2aWV3Qm94PSIwIDAgNDQ4IDQ0OCIgd2lkdGg9IjQ0OHB0IiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPjxwYXRoIGQ9Im00MDggMTg0aC0xMzZjLTQuNDE3OTY5IDAtOC0zLjU4MjAzMS04LTh2LTEzNmMwLTIyLjA4OTg0NC0xNy45MTAxNTYtNDAtNDAtNDBzLTQwIDE3LjkxMDE1Ni00MCA0MHYxMzZjMCA0LjQxNzk2OS0zLjU4MjAzMSA4LTggOGgtMTM2Yy0yMi4wODk4NDQgMC00MCAxNy45MTAxNTYtNDAgNDBzMTcuOTEwMTU2IDQwIDQwIDQwaDEzNmM0LjQxNzk2OSAwIDggMy41ODIwMzEgOCA4djEzNmMwIDIyLjA4OTg0NCAxNy45MTAxNTYgNDAgNDAgNDBzNDAtMTcuOTEwMTU2IDQwLTQwdi0xMzZjMC00LjQxNzk2OSAzLjU4MjAzMS04IDgtOGgxMzZjMjIuMDg5ODQ0IDAgNDAtMTcuOTEwMTU2IDQwLTQwcy0xNy45MTAxNTYtNDAtNDAtNDB6bTAgMCIvPjwvc3ZnPg==");
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.card-delete {
+    backdrop-filter: blur(8px);
+    border-radius: 50%;
+    border: 1.5px solid #a4a4a4;
+	position: absolute;
+	bottom: 5px;
+	right: 5px;
+    color: rgb(0, 0, 0);
+    width: 50px;
+	height: 50px;
+    background-size: 50%;
+    background-image: url("data:image/svg+xml;base64,PHN2ZyBpZD0iTGF5ZXJfMSIgZW5hYmxlLWJhY2tncm91bmQ9Im5ldyAwIDAgNTEyIDUxMiIgaGVpZ2h0PSI1MTIiIHZpZXdCb3g9IjAgMCA1MTIgNTEyIiB3aWR0aD0iNTEyIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPjxnPjxwYXRoIGQ9Im00MjQgNjRoLTg4di0xNmMwLTI2LjQ2Ny0yMS41MzMtNDgtNDgtNDhoLTY0Yy0yNi40NjcgMC00OCAyMS41MzMtNDggNDh2MTZoLTg4Yy0yMi4wNTYgMC00MCAxNy45NDQtNDAgNDB2NTZjMCA4LjgzNiA3LjE2NCAxNiAxNiAxNmg4Ljc0NGwxMy44MjMgMjkwLjI4M2MxLjIyMSAyNS42MzYgMjIuMjgxIDQ1LjcxNyA0Ny45NDUgNDUuNzE3aDI0Mi45NzZjMjUuNjY1IDAgNDYuNzI1LTIwLjA4MSA0Ny45NDUtNDUuNzE3bDEzLjgyMy0yOTAuMjgzaDguNzQ0YzguODM2IDAgMTYtNy4xNjQgMTYtMTZ2LTU2YzAtMjIuMDU2LTE3Ljk0NC00MC00MC00MHptLTIxNi0xNmMwLTguODIyIDcuMTc4LTE2IDE2LTE2aDY0YzguODIyIDAgMTYgNy4xNzggMTYgMTZ2MTZoLTk2em0tMTI4IDU2YzAtNC40MTEgMy41ODktOCA4LThoMzM2YzQuNDExIDAgOCAzLjU4OSA4IDh2NDBjLTQuOTMxIDAtMzMxLjU2NyAwLTM1MiAwem0zMTMuNDY5IDM2MC43NjFjLS40MDcgOC41NDUtNy40MjcgMTUuMjM5LTE1Ljk4MSAxNS4yMzloLTI0Mi45NzZjLTguNTU1IDAtMTUuNTc1LTYuNjk0LTE1Ljk4MS0xNS4yMzlsLTEzLjc1MS0yODguNzYxaDMwMi40NHoiLz48cGF0aCBkPSJtMjU2IDQ0OGM4LjgzNiAwIDE2LTcuMTY0IDE2LTE2di0yMDhjMC04LjgzNi03LjE2NC0xNi0xNi0xNnMtMTYgNy4xNjQtMTYgMTZ2MjA4YzAgOC44MzYgNy4xNjMgMTYgMTYgMTZ6Ii8+PHBhdGggZD0ibTMzNiA0NDhjOC44MzYgMCAxNi03LjE2NCAxNi0xNnYtMjA4YzAtOC44MzYtNy4xNjQtMTYtMTYtMTZzLTE2IDcuMTY0LTE2IDE2djIwOGMwIDguODM2IDcuMTYzIDE2IDE2IDE2eiIvPjxwYXRoIGQ9Im0xNzYgNDQ4YzguODM2IDAgMTYtNy4xNjQgMTYtMTZ2LTIwOGMwLTguODM2LTcuMTY0LTE2LTE2LTE2cy0xNiA3LjE2NC0xNiAxNnYyMDhjMCA4LjgzNiA3LjE2MyAxNiAxNiAxNnoiLz48L2c+PC9zdmc+");
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+@media screen and (max-width: 1080px) {
+	.products {
+		grid-template-columns: minmax(250px, auto) minmax(250px, auto) minmax(
+				250px,
+				auto
+			);
+	}
+}
+
+@media screen and (max-width: 768px) {
+	.products {
+		grid-template-columns: minmax(250px, auto) minmax(250px, auto);
+	}
+}
+
+@media screen and (max-width: 488px) {
+	.products {
+		grid-template-columns: minmax(250px, auto);
+	}
+}
+
+.p1 {
+	background-image: url("./imgs/p1.png");
+}
+
+.p2 {
+	background-image: url("./imgs/p2.png");
+}
+
+.p3 {
+	background-image: url("./imgs/p3.png");
+}
+
+.p4 {
+	background-image: url("./imgs/p4.png");
+}
+
+.p5 {
+	background-image: url("./imgs/p5.png");
+}
+
+.p6 {
+	background-image: url("./imgs/p6.png");
+}
+
+.p7 {
+	background-image: url("./imgs/p7.png");
+}
+
+.p8 {
+	background-image: url("./imgs/p2.png");
+}
+
+.p9 {
+	background-image: url("./imgs/p4.png");
+}
+
+.p10 {
+	background-image: url("./imgs/p1.png");
+}

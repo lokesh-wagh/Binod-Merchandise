@@ -1,0 +1,28 @@
+.banner {
+    width: 100%;
+    height: 100vh;
+}
+
+.swiper-container {
+	width: 100%;
+	height: 100%;
+    --swiper-theme-color: #383838;
+}
+
+.swiper-slide {
+	background-position: center;
+	background-size: cover;
+}
+
+.slide-text {
+    position: relative;
+    top: 40vh;
+    font: normal 2em Montserrat;
+    color: black;
+    width: 40vw;
+    left: 5vw;
+}
+
+.slide-text span{
+    font: lighter 0.4em Montserrat;
+}

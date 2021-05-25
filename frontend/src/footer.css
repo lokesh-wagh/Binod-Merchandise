@@ -1,0 +1,70 @@
+.footer {
+	position: relative;
+	width: 100%;
+	height: 350px;
+	background-color: #575757;
+	display: flex;
+	flex-direction: row;
+}
+
+.contact-form {
+	display: flex;
+	flex-direction: column;
+	flex: 2 1;
+}
+
+.footer-details {
+	display: block;
+	flex: 1 1;
+}
+
+.footer-title {
+	position: absolute;
+	top: 20px;
+	left: 50px;
+	font: normal 1.2em Montserrat;
+}
+
+.footer input {
+	font: normal 1em Montserrat;
+	color: grey;
+	height: 30px;
+	margin: 50px;
+	margin-top: 80px;
+	margin-bottom: 0px;
+}
+
+.footer textarea {
+	font: normal 1em Montserrat;
+	color: grey;
+	height: 150px;
+	margin: 50px;
+	margin-top: 10px;
+}
+
+.footer button {
+	position: absolute;
+	bottom: 10px;
+	font: normal 1em Montserrat;
+	color: black;
+	background-color: rgb(172, 172, 172);
+	height: auto;
+	margin-right: 50px;
+	margin-left: 50px;
+	margin-top: 10px;
+}
+
+.footer-menu {
+	height: 30%;
+	top: 10%;
+	position: relative;
+	padding: 0;
+}
+
+@media screen and (max-width: 600px) {
+	.footer-menu {
+		margin: 0;
+		width: 60%;
+		flex-direction: column;
+	}
+}
