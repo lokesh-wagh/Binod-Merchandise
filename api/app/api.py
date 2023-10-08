@@ -2,11 +2,17 @@ from fastapi import FastAPI, Request
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.encoders import jsonable_encoder
 from fastapi_mail import FastMail, MessageSchema,ConnectionConfig
+from dotenv import load_dotenv
 import json
-from app import EMAIL, PSWRD
+from app import EMAIL,PSWRD
 import os
 
+load_dotenv()
+
 app = FastAPI()
+
+EMAIL=os.environ.get('EMAIL')
+PSWRD=os.environ.get('PSWRD')
 
 origins = [
     "http://localhost:3000",
