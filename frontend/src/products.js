@@ -107,7 +107,7 @@ class Product extends Component {
 		})
 		products.push(
 			<div className={`card add`} data-aos='zoom-in'>
-				<form onSubmit={(e) => this.onSubmit(e)}>
+				<form onSubmit={(e) => this.onSubmit(e)} on>
 					<select
 						className='card-size-selector'
 						placeholder='Size'
@@ -125,6 +125,7 @@ class Product extends Component {
 						required
 					/>
 					<button type='submit' className='card-add-button' />
+					<button type='submit' className='card-add-button2' />
 				</form>
 			</div>
 		)

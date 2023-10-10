@@ -17,10 +17,14 @@ origins = [
 conf = ConnectionConfig(
     MAIL_USERNAME = EMAIL,
     MAIL_PASSWORD = PSWRD,
+    MAIL_FROM = EMAIL,
     MAIL_PORT = 587,
     MAIL_SERVER = "smtp.gmail.com",
-    MAIL_TLS = True,
-    MAIL_SSL = False
+    MAIL_FROM_NAME="Binod Commerce",
+    MAIL_STARTTLS = True,
+    MAIL_SSL_TLS = False,
+    USE_CREDENTIALS = True,
+    VALIDATE_CERTS = True
 )
 
 app.add_middleware(
@@ -39,7 +43,7 @@ async def read_root() -> dict:
 
 @app.get("/get_products")
 async def read_db_products() -> dict:
-    with open(f'{DIR_PATH}\\app\\database.json') as json_file:
+    with open(f'{DIR_PATH}/app/database.json') as json_file:
         products = json.load(json_file)
     return products
 
@@ -49,7 +53,7 @@ async def save_project(request: Request):
     data = jsonable_encoder(data)
     if len(data.keys())==0:
         return {"message":"No data passed"}
-    with open(f'{DIR_PATH}\\app\\database.json','r') as json_file:
+    with open(f'{DIR_PATH}/app/database.json','r') as json_file:
         products = json.load(json_file)
         products["products"].append({
             "key": int(data["key"]),
@@ -58,18 +62,18 @@ async def save_project(request: Request):
             "visible": True,
         })
         print(products)
-    with open(f'{DIR_PATH}\\app\\database.json','w') as json_file:
+    with open(f'{DIR_PATH}/app/database.json','w') as json_file:
         json_file.write(json.dumps(products,indent=4))
     return {"message": "Your product has been saved successfully"}
 
 @app.get("/delete_project/{key}")
 async def save_project(key: int):
-    with open(f'{DIR_PATH}\\app\\database.json','r') as json_file:
+    with open(f'{DIR_PATH}/app/database.json','r') as json_file:
         products = json.load(json_file)
         for product in products["products"]:
             if product["key"] == key:
                 products["products"].remove(product)
-    with open(f'{DIR_PATH}\\app\\database.json','w') as json_file:
+    with open(f'{DIR_PATH}/app/database.json','w') as json_file:
         json_file.write(json.dumps(products,indent=4))
     return {"message": "Your product has been deleted successfully"}
 

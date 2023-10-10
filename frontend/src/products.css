@@ -135,6 +135,22 @@
     background-repeat: no-repeat;
 }
 
+.card-add-button2 {
+    backdrop-filter: blur(8px);
+    border-radius: 50%;
+    border: 1.5px solid #a4a4a4;
+	position: absolute;
+	bottom: 60px;
+	right: 5px;
+    color: rgb(0, 0, 0);
+    width: 50px;
+	height: 50px;
+    background-size: 50%;
+    background-image: url("https://cdn-icons-png.flaticon.com/512/2956/2956744.png");
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
 @media screen and (max-width: 1080px) {
 	.products {
 		grid-template-columns: minmax(250px, auto) minmax(250px, auto) minmax(

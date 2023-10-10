@@ -7,12 +7,6 @@
             "visible": true
         },
         {
-            "key": 2,
-            "name": "Matte black T-shirt",
-            "size": "L",
-            "visible": true
-        },
-        {
             "key": 3,
             "name": "Party jacket",
             "size": "M",
@@ -40,6 +34,12 @@
             "key": 7,
             "name": "Formal affair",
             "size": "S",
+            "visible": true
+        },
+        {
+            "key": 8,
+            "name": "lknnx",
+            "size": "XL",
             "visible": true
         }
     ]
