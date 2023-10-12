@@ -3,6 +3,14 @@ import Aos from "aos"
 import "aos/dist/aos.css"
 import React, { Component } from "react"
 
+import { Client, ID, Storage } from "appwrite";
+
+const client = new Client()
+    .setEndpoint('https://cloud.appwrite.io/v1')
+    .setProject('[PROJECT_ID]');
+
+const storage = new Storage(client);
+
 class Product extends Component {
 	constructor(props) {
 		super(props)
@@ -10,6 +18,8 @@ class Product extends Component {
 			products: [],
 			title: "",
 			size: "S",
+			file: null,
+			imageURL:"",
 		}
 	}
 	componentDidMount() {
@@ -47,6 +57,28 @@ class Product extends Component {
 		filters.forEach((filter) => {filter.className = ""});
 		event.target.className = "active";
 	}
+
+	handleFileChange = (event) => {
+		const file = event.target.files[0];
+		this.setState({ file: file });
+	  };
+	
+	  handleUpload =  () => {
+		const { file } = this.state;
+		if (file) {
+		  const promise = storage.createFile('[BUCKET_ID]', ID.unique(), file);
+		  promise.then(
+			(response) => {
+				const promise = storage.getFilePreview('[BUCKET_ID]',response.$id);
+				this.setState({imageURL:promise.toString()})
+			}
+		  ).catch((error) => {
+			alert(error)
+		  });
+		} else {
+		  alert('No file selected');
+		}
+	  };
 	DeleteProduct(e) {
 		var mproduct = e.target.closest(".card")
 		var cproducts = this.state.products
@@ -72,6 +104,7 @@ class Product extends Component {
 		data.append("title",this.state.title)
 		data.append("size", this.state.size)
 		data.append("key", tproduct.key + 1)
+		data.append("imageURL", this.state.imageURL)
 		const saveProjects = async () => {
 			await fetch("http://localhost:8000/save_project",{
 				method:"POST",body: data
@@ -82,15 +115,17 @@ class Product extends Component {
 			key: tproduct.key + 1,
 			name: this.state.title,
 			size: this.state.size,
+			imageURL: this.state.imageURL,
 			visible: true,
 		})
-		this.setState({ products: cproducts, title: "", size: "S" })
+		this.setState({ products: cproducts, title: "", size: "S", imageURL: ""})
 	}
 	render() {
 		var products = this.state.products.map((product) => {
 			if (product.visible) {
 				return (
-					<div className={`card p${product.key}`} data-aos='zoom-in'>
+					<div className={`card `} data-aos='zoom-in'>
+						<img src={product.imageURL} className="card-image" alt="product"/>
 						<div className='card-size'>{product.size}</div>
 						<div className='card-title'>{product.name}</div>
 						<button
@@ -124,8 +159,8 @@ class Product extends Component {
 						onChange={(e) => this.setState({ title: e.target.value })}
 						required
 					/>
-					<button type='submit' className='card-add-button' />
-					<button type='submit' className='card-add-button2' />
+					<input type="file" accept="image/*" onChange={this.handleFileChange} className="uploader"/>
+					<button onClick={this.handleUpload} className="card-add-button"/>
 				</form>
 			</div>
 		)

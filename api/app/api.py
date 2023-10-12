@@ -59,6 +59,7 @@ async def save_project(request: Request):
             "key": int(data["key"]),
             "name": data["title"],
             "size": data["size"],
+            "imageURL": data["imageURL"],
             "visible": True,
         })
         print(products)
