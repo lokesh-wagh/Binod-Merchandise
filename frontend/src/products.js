@@ -2,12 +2,12 @@ import "./products.css"
 import Aos from "aos"
 import "aos/dist/aos.css"
 import React, { Component } from "react"
-
 import { Client, ID, Storage } from "appwrite";
+
 
 const client = new Client()
     .setEndpoint('https://cloud.appwrite.io/v1')
-    .setProject('[PROJECT_ID]');
+    .setProject(process.env.REACT_APP_PROJECT_ID);
 
 const storage = new Storage(client);
 
@@ -66,10 +66,10 @@ class Product extends Component {
 	  handleUpload =  () => {
 		const { file } = this.state;
 		if (file) {
-		  const promise = storage.createFile('[BUCKET_ID]', ID.unique(), file);
+		  const promise = storage.createFile(process.env.REACT_APP_BUCKET_ID, ID.unique(), file);
 		  promise.then(
 			(response) => {
-				const promise = storage.getFilePreview('[BUCKET_ID]',response.$id);
+				const promise = storage.getFilePreview(process.env.REACT_APP_BUCKET_ID,response.$id);
 				this.setState({imageURL:promise.toString()})
 			}
 		  ).catch((error) => {

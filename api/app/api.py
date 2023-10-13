@@ -6,6 +6,7 @@ import json
 from app import EMAIL, PSWRD
 import os
 
+
 app = FastAPI()
 
 origins = [
@@ -37,13 +38,15 @@ app.add_middleware(
 
 DIR_PATH = os.getcwd()
 
+json_file_path = os.path.join(DIR_PATH, "app", "database.json")
+
 @app.get("/", tags=["root"])
 async def read_root() -> dict:
     return {"message": "Backend is working great!!!"}
 
 @app.get("/get_products")
 async def read_db_products() -> dict:
-    with open(f'{DIR_PATH}/app/database.json') as json_file:
+    with open(json_file_path) as json_file:
         products = json.load(json_file)
     return products
 
@@ -53,28 +56,28 @@ async def save_project(request: Request):
     data = jsonable_encoder(data)
     if len(data.keys())==0:
         return {"message":"No data passed"}
-    with open(f'{DIR_PATH}/app/database.json','r') as json_file:
+    with open(json_file_path,'r') as json_file:
         products = json.load(json_file)
         products["products"].append({
             "key": int(data["key"]),
             "name": data["title"],
             "size": data["size"],
-            "imageURL": data["imageURL"],
+            "imageURL": data["imageURL"] if data["imageURL"] else "https://cloud.appwrite.io/v1/storage/buckets/6528591515f8b537058c/files/65297172d64d55d33a65/view?project=6525861227b93b73d7ee&mode=admin",
             "visible": True,
         })
         print(products)
-    with open(f'{DIR_PATH}/app/database.json','w') as json_file:
+    with open(json_file_path,'w') as json_file:
         json_file.write(json.dumps(products,indent=4))
     return {"message": "Your product has been saved successfully"}
 
 @app.get("/delete_project/{key}")
 async def save_project(key: int):
-    with open(f'{DIR_PATH}/app/database.json','r') as json_file:
+    with open(json_file_path,'r') as json_file:
         products = json.load(json_file)
         for product in products["products"]:
             if product["key"] == key:
                 products["products"].remove(product)
-    with open(f'{DIR_PATH}/app/database.json','w') as json_file:
+    with open(json_file_path,'w') as json_file:
         json_file.write(json.dumps(products,indent=4))
     return {"message": "Your product has been deleted successfully"}
 
