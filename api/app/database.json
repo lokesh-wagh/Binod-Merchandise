@@ -1,38 +1,8 @@
 {
     "products": [
         {
-            "key": 1,
-            "name": "Cool Jacket",
-            "size": "XL",
-            "visible": true
-        },
-        {
-            "key": 2,
-            "name": "Matte black T-shirt",
-            "size": "L",
-            "visible": true
-        },
-        {
-            "key": 3,
-            "name": "Party jacket",
-            "size": "M",
-            "visible": true
-        },
-        {
-            "key": 4,
-            "name": "Everyday jeans",
-            "size": "L",
-            "visible": true
-        },
-        {
-            "key": 5,
-            "name": "Pattern T-Shirt",
-            "size": "XL",
-            "visible": true
-        },
-        {
-            "key": 7,
-            "name": "Formal affair",
+            "key": 8,
+            "name": "as",
             "size": "S",
             "visible": true
         }
