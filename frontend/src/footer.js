@@ -14,10 +14,15 @@ class Footer extends Component {
         data.append("email", this.state.email)
         data.append("message", this.state.msg)
         console.log(this.state.email, this.state.msg);
+
         const sendMail = async () => {
+
 			await fetch("http://localhost:8000/email",{
 				method:"POST",body: data,mode: "cors"
-			}).then(alert("Your msg has been sent successfully to you and binod!"))
+			}).then(
+			()=>{
+			alert("Your msg has been sent successfully to you and binod!")
+			})
 		}
 		sendMail();
     }

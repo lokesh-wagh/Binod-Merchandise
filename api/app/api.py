@@ -13,7 +13,7 @@ app = FastAPI()
 
 EMAIL=os.environ.get('EMAIL') #EMAIL used from env
 PSWRD=os.environ.get('PSWRD')#PSWRD used from env
-
+USRNAME=os.environ.get('USERNAME')
 origins = [
     "http://localhost:3000",
     "localhost:3000",
@@ -21,12 +21,13 @@ origins = [
 ]
 
 conf = ConnectionConfig(
-    MAIL_USERNAME = EMAIL,
+    MAIL_USERNAME = USRNAME,
     MAIL_PASSWORD = PSWRD,
+    MAIL_FROM=EMAIL,
     MAIL_PORT = 587,
     MAIL_SERVER = "smtp.gmail.com",
-    MAIL_TLS = True,
-    MAIL_SSL = False
+    MAIL_STARTTLS = True, #previous configuration was deprecated 
+    MAIL_SSL_TLS = False
 )
 
 app.add_middleware(
