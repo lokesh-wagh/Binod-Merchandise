@@ -2,6 +2,9 @@ from fastapi import FastAPI, Request
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.encoders import jsonable_encoder
 from fastapi_mail import FastMail, MessageSchema,ConnectionConfig
+from sqlalchemy import create_engine,ForeignKey,Column,String,Boolean,Integer
+from sqlalchemy.ext.declarative import declarative_base
+from sqlalchemy.orm import sessionmaker
 import json
 from app import EMAIL, PSWRD
 import os
@@ -44,11 +47,48 @@ json_file_path = os.path.join(DIR_PATH, "app", "database.json")
 async def read_root() -> dict:
     return {"message": "Backend is working great!!!"}
 
+Base = declarative_base()
+
+class Merch(Base):
+    __tablename__ = "merchandise"
+
+    key = Column("key",Integer,primary_key=True)
+    name = Column("name",String)
+    size = Column("size",String)
+    visible = Column("visible",Boolean)
+
+    def __init__(self,key,name,size,visible):
+        self.key = key
+        self.name = name
+        self.size = size
+        self.visible = visible 
+
+engine = create_engine("sqlite:///binod.db",echo=True)
+Base.metadata.create_all(bind=engine)
+Session = sessionmaker(bind=engine)
+session = Session()
+
+def makeEntriesInDatabase():
+    merch1=Merch(1,'Cool Jacket',"XL",True)
+    merch2=Merch(2,"Matte black T-shirt","L",True)
+    merch3=Merch(3,"Party jacket","M",True)
+    merch4=Merch(4,"Everyday jeans","L",True)
+    merch5=Merch(5,"Pattern T-Shirt","XL",True)
+    merch6=Merch(6,"Fancy grey scarfed","M",True)
+    merch7=Merch(7,"Formal affair","S",True)
+    session.add_all([merch1,merch2,merch3,merch4,merch5,merch6,merch7])
+    session.commit()
+
+#makeEntriesInDatabase() #comment this code out if it is the database has not been created yet 
+
+
 @app.get("/get_products")
 async def read_db_products() -> dict:
-    with open(json_file_path) as json_file:
-        products = json.load(json_file)
-    return products
+    query = session.query(Merch).all()
+    serialized_products = [{'name': product.name, 'size': product.size, 'key': product.key, 'visible': product.visible} for product in query]
+    produce={"products":serialized_products}
+    
+    return produce
 
 @app.post("/save_project")
 async def save_project(request: Request):
@@ -56,29 +96,17 @@ async def save_project(request: Request):
     data = jsonable_encoder(data)
     if len(data.keys())==0:
         return {"message":"No data passed"}
-    with open(json_file_path,'r') as json_file:
-        products = json.load(json_file)
-        products["products"].append({
-            "key": int(data["key"]),
-            "name": data["title"],
-            "size": data["size"],
-            "imageURL": data["imageURL"] if data["imageURL"] else "https://cloud.appwrite.io/v1/storage/buckets/6528591515f8b537058c/files/65297172d64d55d33a65/view?project=6525861227b93b73d7ee&mode=admin",
-            "visible": True,
-        })
-        print(products)
-    with open(json_file_path,'w') as json_file:
-        json_file.write(json.dumps(products,indent=4))
+    
+    productToEnter = Merch(data["key"],data["title"],data["size"],True)
+    session.add(productToEnter)
+    session.commit()
+    
     return {"message": "Your product has been saved successfully"}
 
 @app.get("/delete_project/{key}")
 async def save_project(key: int):
-    with open(json_file_path,'r') as json_file:
-        products = json.load(json_file)
-        for product in products["products"]:
-            if product["key"] == key:
-                products["products"].remove(product)
-    with open(json_file_path,'w') as json_file:
-        json_file.write(json.dumps(products,indent=4))
+    session.query(Merch).filter(Merch.key==key).delete()
+    session.commit()
     return {"message": "Your product has been deleted successfully"}
 
 def get_template(mail,msg):
