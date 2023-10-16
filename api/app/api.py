@@ -48,7 +48,7 @@ async def read_root() -> dict:
     return {"message": "Backend is working great!!!"}
 
 Base = declarative_base()
-
+standardURL = "https://cloud.appwrite.io/v1/storage/buckets/6528591515f8b537058c/files/65297172d64d55d33a65/view?project=6525861227b93b73d7ee&mode=admin"
 class Merch(Base):
     __tablename__ = "merchandise"
 
@@ -56,26 +56,26 @@ class Merch(Base):
     name = Column("name",String)
     size = Column("size",String)
     visible = Column("visible",Boolean)
-
-    def __init__(self,key,name,size,visible):
+    imageURL = Column("imageURL",String)
+    def __init__(self,key,name,size,visible,imageURL):
         self.key = key
         self.name = name
         self.size = size
         self.visible = visible 
-
+        self.imageURL = imageURL
 engine = create_engine("sqlite:///binod.db",echo=True)
 Base.metadata.create_all(bind=engine)
 Session = sessionmaker(bind=engine)
 session = Session()
 
 def makeEntriesInDatabase():
-    merch1=Merch(1,'Cool Jacket',"XL",True)
-    merch2=Merch(2,"Matte black T-shirt","L",True)
-    merch3=Merch(3,"Party jacket","M",True)
-    merch4=Merch(4,"Everyday jeans","L",True)
-    merch5=Merch(5,"Pattern T-Shirt","XL",True)
-    merch6=Merch(6,"Fancy grey scarfed","M",True)
-    merch7=Merch(7,"Formal affair","S",True)
+    merch1=Merch(1,'Cool Jacket',"XL",True,standardURL)
+    merch2=Merch(2,"Matte black T-shirt","L",True, standardURL)
+    merch3=Merch(3,"Party jacket","M",True, standardURL)
+    merch4=Merch(4,"Everyday jeans","L",True, standardURL)
+    merch5=Merch(5,"Pattern T-Shirt","XL",True,standardURL)
+    merch6=Merch(6,"Fancy grey scarfed","M",True,standardURL)
+    merch7=Merch(7,"Formal affair","S",True,standardURL)
     session.add_all([merch1,merch2,merch3,merch4,merch5,merch6,merch7])
     session.commit()
 
@@ -85,7 +85,7 @@ def makeEntriesInDatabase():
 @app.get("/get_products")
 async def read_db_products() -> dict:
     query = session.query(Merch).all()
-    serialized_products = [{'name': product.name, 'size': product.size, 'key': product.key, 'visible': product.visible} for product in query]
+    serialized_products = [{'name': product.name, 'size': product.size, 'key': product.key, 'visible': product.visible , 'imageURL':product.imageURL} for product in query]
     produce={"products":serialized_products}
     
     return produce
@@ -97,7 +97,7 @@ async def save_project(request: Request):
     if len(data.keys())==0:
         return {"message":"No data passed"}
     
-    productToEnter = Merch(data["key"],data["title"],data["size"],True)
+    productToEnter = Merch(data["key"],data["title"],data["size"],True,data["image"] if data["imageURL"] else standardURL)
     session.add(productToEnter)
     session.commit()
     
