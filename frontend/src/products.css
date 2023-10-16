@@ -45,7 +45,7 @@
 
 .card {
 	display: block;
-	width: 80%;
+	width: 280px;
 	height: 300px;
 	margin: 20px;
 	border-radius: 15px;
@@ -55,6 +55,12 @@
                  -20px -20px 60px #ffffff;
     text-align: left;
     padding: 5px;
+}
+
+.card-image{
+	max-width: 100%;
+	max-height: 100%;
+	border-radius: 15px;
 }
 
 .card-title {
@@ -117,6 +123,13 @@
     background-image: url("data:image/svg+xml;base64,PHN2ZyBoZWlnaHQ9IjQ0OHB0IiB2aWV3Qm94PSIwIDAgNDQ4IDQ0OCIgd2lkdGg9IjQ0OHB0IiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPjxwYXRoIGQ9Im00MDggMTg0aC0xMzZjLTQuNDE3OTY5IDAtOC0zLjU4MjAzMS04LTh2LTEzNmMwLTIyLjA4OTg0NC0xNy45MTAxNTYtNDAtNDAtNDBzLTQwIDE3LjkxMDE1Ni00MCA0MHYxMzZjMCA0LjQxNzk2OS0zLjU4MjAzMSA4LTggOGgtMTM2Yy0yMi4wODk4NDQgMC00MCAxNy45MTAxNTYtNDAgNDBzMTcuOTEwMTU2IDQwIDQwIDQwaDEzNmM0LjQxNzk2OSAwIDggMy41ODIwMzEgOCA4djEzNmMwIDIyLjA4OTg0NCAxNy45MTAxNTYgNDAgNDAgNDBzNDAtMTcuOTEwMTU2IDQwLTQwdi0xMzZjMC00LjQxNzk2OSAzLjU4MjAzMS04IDgtOGgxMzZjMjIuMDg5ODQ0IDAgNDAtMTcuOTEwMTU2IDQwLTQwcy0xNy45MTAxNTYtNDAtNDAtNDB6bTAgMCIvPjwvc3ZnPg==");
     background-position: center;
     background-repeat: no-repeat;
+}
+
+.uploader {
+	position: absolute;
+	bottom: 50px;
+	left: 5px;
+	color: black;
 }
 
 .card-delete {

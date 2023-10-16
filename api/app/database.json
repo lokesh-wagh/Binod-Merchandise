@@ -4,42 +4,42 @@
             "key": 1,
             "name": "Cool Jacket",
             "size": "XL",
-            "visible": true
-        },
-        {
-            "key": 2,
-            "name": "Matte black T-shirt",
-            "size": "L",
+            "imageURL": "https://cloud.appwrite.io/v1/storage/buckets/6528591515f8b537058c/files/65297146baae5ed5acdc/view?project=6525861227b93b73d7ee&mode=admin",
             "visible": true
         },
         {
             "key": 3,
             "name": "Party jacket",
             "size": "M",
+            "imageURL": "https://cloud.appwrite.io/v1/storage/buckets/6528591515f8b537058c/files/652971582b5523a89845/view?project=6525861227b93b73d7ee&mode=admin",
             "visible": true
         },
         {
             "key": 4,
             "name": "Everyday jeans",
             "size": "L",
-            "visible": true
-        },
-        {
-            "key": 5,
-            "name": "Pattern T-Shirt",
-            "size": "XL",
+            "imageURL": "https://cloud.appwrite.io/v1/storage/buckets/6528591515f8b537058c/files/6529716aeacc428ee722/view?project=6525861227b93b73d7ee&mode=admin",
             "visible": true
         },
         {
             "key": 6,
             "name": "Fancy grey scarfed",
             "size": "M",
+            "imageURL": "https://cloud.appwrite.io/v1/storage/buckets/652586f6de29dd2465ed/files/6528488d5039ff554452/view?project=6525861227b93b73d7ee&mode=admin",
             "visible": true
         },
         {
             "key": 7,
             "name": "Formal affair",
             "size": "S",
+            "imageURL": "https://cloud.appwrite.io/v1/storage/buckets/652586f6de29dd2465ed/files/6526dfbf2d63a8a28d55/view?project=6525861227b93b73d7ee&mode=admin",
+            "visible": true
+        },
+        {
+            "key": 8,
+            "name": "lklkd",
+            "size": "S",
+            "imageURL": "https://cloud.appwrite.io/v1/storage/buckets/6528591515f8b537058c/files/65297172d64d55d33a65/view?project=6525861227b93b73d7ee&mode=admin",
             "visible": true
         }
     ]

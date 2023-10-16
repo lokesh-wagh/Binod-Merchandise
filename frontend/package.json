@@ -6,9 +6,12 @@
     "@testing-library/jest-dom": "^5.11.4",
     "@testing-library/react": "^11.1.0",
     "@testing-library/user-event": "^12.1.10",
+    "aos": "^2.3.4",
+    "appwrite": "^13.0.0",
+    "dotenv": "^16.3.1",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
-    "react-scripts": "4.0.3",
+    "react-scripts": "^5.0.1",
     "sass": "^1.32.11",
     "swiper": "^6.5.7",
     "web-vitals": "^1.0.1"
@@ -38,6 +41,9 @@
     ]
   },
   "devDependencies": {
+    "@babel/core": "^7.23.2",
+    "@babel/preset-env": "^7.23.2",
+    "babel-eslint": "^10.1.0",
     "eslint-config-react-app": "^6.0.0"
   }
 }
