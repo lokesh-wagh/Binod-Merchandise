@@ -47,8 +47,8 @@ json_file_path = os.path.join(DIR_PATH, "app", "database.json")
 async def read_root() -> dict:
     return {"message": "Backend is working great!!!"}
 
-Base = declarative_base()
-standardURL = "https://cloud.appwrite.io/v1/storage/buckets/6528591515f8b537058c/files/65297172d64d55d33a65/view?project=6525861227b93b73d7ee&mode=admin"
+Base = declarative_base() #class that alll the model's have to inherit
+standardURL = "https://cloud.appwrite.io/v1/storage/buckets/6528591515f8b537058c/files/65297172d64d55d33a65/view?project=6525861227b93b73d7ee&mode=admin" #by default photo url
 class Merch(Base):
     __tablename__ = "merchandise"
 
@@ -63,12 +63,12 @@ class Merch(Base):
         self.size = size
         self.visible = visible 
         self.imageURL = imageURL
-engine = create_engine("sqlite:///binod.db",echo=True)
-Base.metadata.create_all(bind=engine)
-Session = sessionmaker(bind=engine)
-session = Session()
+engine = create_engine("sqlite:///binod.db",echo=True) #connect to database and create a engine
+Base.metadata.create_all(bind=engine) #all the classes extending Base 
+Session = sessionmaker(bind=engine) #session class
+session = Session()#session object using which we can write to the database
 
-def makeEntriesInDatabase():
+def makeEntriesInDatabase(): #this function is to be run only for the first time when the database is not initialized
     merch1=Merch(1,'Cool Jacket',"XL",True,standardURL)
     merch2=Merch(2,"Matte black T-shirt","L",True, standardURL)
     merch3=Merch(3,"Party jacket","M",True, standardURL)
@@ -76,16 +76,16 @@ def makeEntriesInDatabase():
     merch5=Merch(5,"Pattern T-Shirt","XL",True,standardURL)
     merch6=Merch(6,"Fancy grey scarfed","M",True,standardURL)
     merch7=Merch(7,"Formal affair","S",True,standardURL)
-    session.add_all([merch1,merch2,merch3,merch4,merch5,merch6,merch7])
-    session.commit()
+    session.add_all([merch1,merch2,merch3,merch4,merch5,merch6,merch7])# add all the object's
+    session.commit()#commit change's to database
 
 #makeEntriesInDatabase() #comment this code out if it is the database has not been created yet 
 
 
 @app.get("/get_products")
 async def read_db_products() -> dict:
-    query = session.query(Merch).all()
-    serialized_products = [{'name': product.name, 'size': product.size, 'key': product.key, 'visible': product.visible , 'imageURL':product.imageURL} for product in query]
+    query = session.query(Merch).all() #get all product's
+    serialized_products = [{'name': product.name, 'size': product.size, 'key': product.key, 'visible': product.visible , 'imageURL':product.imageURL} for product in query] #convert the object's into json
     produce={"products":serialized_products}
     
     return produce
@@ -97,16 +97,16 @@ async def save_project(request: Request):
     if len(data.keys())==0:
         return {"message":"No data passed"}
     
-    productToEnter = Merch(data["key"],data["title"],data["size"],True,data["image"] if data["imageURL"] else standardURL)
-    session.add(productToEnter)
+    productToEnter = Merch(data["key"],data["title"],data["size"],True,data["image"] if data["imageURL"] else standardURL)#create new object
+    session.add(productToEnter)##write object to database
     session.commit()
     
     return {"message": "Your product has been saved successfully"}
 
 @app.get("/delete_project/{key}")
 async def save_project(key: int):
-    session.query(Merch).filter(Merch.key==key).delete()
-    session.commit()
+    session.query(Merch).filter(Merch.key==key).delete()# query by key and delete
+    session.commit()#commit all the change's
     return {"message": "Your product has been deleted successfully"}
 
 def get_template(mail,msg):
